@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Tech Related Blog]]></title>
+  <title><![CDATA[Tangramor's Blog | 唐图]]></title>
   <link href="http://tangramor.github.io/atom.xml" rel="self"/>
   <link href="http://tangramor.github.io/"/>
-  <updated>2014-02-08T16:25:46+08:00</updated>
+  <updated>2014-02-08T17:12:30+08:00</updated>
   <id>http://tangramor.github.io/</id>
   <author>
-    <name><![CDATA[Tangramor]]></name>
+    <name><![CDATA[tangramor]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[我的程序我要让她完美]]></title>
+    <link href="http://tangramor.github.io/blog/2014/02/08/wo-de-cheng-xu-wo-yao-rang-ta-wan-mei/"/>
+    <updated>2014-02-08T16:31:22+08:00</updated>
+    <id>http://tangramor.github.io/blog/2014/02/08/wo-de-cheng-xu-wo-yao-rang-ta-wan-mei</id>
+    <content type="html"><![CDATA[<p>从最开始学习编写程序代码以来，我就力图学会完美的实现功能并且使代码拥有漂亮的格式和注释。</p>
+
+<p>但是当程序运行时总是会有这样那样的问题出现，这就好比一个女孩脸上长了青春痘。作为一个准完美主义者，这样的情况发生是不可接受的～！</p>
+
+<p>于是我debug，我google，我熬夜检查代码……</p>
+
+<p>代码的用途终究是确定的，当她完成了自己的任务以后，新的任务又会降临，我只好向她挥手作别，去完成一个新的“完美程序”。</p>
+
+<p>不完美是永恒的，让她完美总在路上。</p>
+]]></content>
+  </entry>
   
 </feed>
