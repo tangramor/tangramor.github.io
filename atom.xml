@@ -4,7 +4,7 @@
   <title><![CDATA[Tangramor's Blog | 唐图]]></title>
   <link href="http://tangramor.github.io/atom.xml" rel="self"/>
   <link href="http://tangramor.github.io/"/>
-  <updated>2014-02-08T17:12:30+08:00</updated>
+  <updated>2014-02-11T18:34:29+08:00</updated>
   <id>http://tangramor.github.io/</id>
   <author>
     <name><![CDATA[tangramor]]></name>
@@ -12,6 +12,236 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在生产环境部署Node.js应用(使用PM2)]]></title>
+    <link href="http://tangramor.github.io/blog/2014/02/11/zai-sheng-chan-huan-jing-bu-shu-node-dot-jsying-yong-shi-yong-pm2/"/>
+    <updated>2014-02-11T18:23:05+08:00</updated>
+    <id>http://tangramor.github.io/blog/2014/02/11/zai-sheng-chan-huan-jing-bu-shu-node-dot-jsying-yong-shi-yong-pm2</id>
+    <content type="html"><![CDATA[<p>OS: Ubuntu-server 12.10</p>
+
+<ol>
+<li>Install Node.js ( <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager</a>  )</li>
+</ol>
+
+
+<p>&#8220;</p>
+
+<pre><code>sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
+</code></pre>
+
+<p>&#8220;</p>
+
+<ol>
+<li>Install PM2 ( <a href="https://github.com/Unitech/pm2">https://github.com/Unitech/pm2</a> )</li>
+</ol>
+
+
+<p>&#8220;</p>
+
+<pre><code>$sudo su
+#npm install pm2@latest -g
+</code></pre>
+
+<p>&#8220;</p>
+
+<ol>
+<li><p>Create INIT script</p>
+
+<p> <code>#pm2 startup</code></p>
+
+<p> The content of /etc/init.d/pm2-init.sh, I modified it to start my app</p></li>
+</ol>
+
+
+<p>&#8220;</p>
+
+<pre><code>\#!/bin/bash
+\# chkconfig: 2345 98 02
+\#
+\# description: PM2 next gen process manager for Node.js
+\# processname: pm2
+\#
+\### BEGIN INIT INFO
+\# Provides:          pm2
+\# Required-Start:
+\# Required-Stop:
+\# Default-Start:        2 3 4 5
+\# Default-Stop:         0 1 6
+\# Short-Description: PM2 init script
+\# Description: PM2 is the next gen process manager for Node.js
+\### END INIT INFO
+
+NAME=pm2
+PM2=/usr/lib/node_modules/pm2/bin/pm2
+NODE=/usr/bin/nodejs
+USER=www-data
+APPHOME=/var/www/ali_product_database/public/api
+
+export HOME="/var/www"
+
+super() {
+    cd $APPHOME &amp;&amp; sudo -u $USER $*
+}
+
+start() {
+    echo "Starting $NAME"
+    super $NODE $PM2 start app.js -i max
+    super $NODE $PM2 resurrect
+}
+
+stop() {
+    super $NODE $PM2 dump
+    super $NODE $PM2 delete all
+    super $NODE $PM2 kill
+}
+
+restart() {
+    echo "Restarting $NAME"
+    stop
+    start
+}
+
+reload() {
+    echo "Reloading $NAME"
+    super $NODE $PM2 reload all
+}
+
+status() {
+    echo "Status for $NAME:"
+    $NODE $PM2 list
+    RETVAL=$?
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status
+        ;;
+    restart)
+        restart
+        ;;
+    reload)
+        reload
+        ;;
+    \*)
+        echo "Usage: {start|stop|status|restart|reload}"
+        exit 1
+        ;;
+esac
+exit $RETVAL
+</code></pre>
+
+<p>&#8220;</p>
+
+<ol>
+<li>Try to start up App:</li>
+</ol>
+
+
+<p>&#8220;</p>
+
+<pre><code>\#/etc/init.d/pm2-init.sh start
+Starting pm2
+PM2 Process launched
+┌──────────┬────┬─────────┬──────┬────────┬──────┬───────────┬────────┬──────────┬──────────────────────────────────┐
+│ App Name │ id │ mode    │ PID  │ status │ port │ Restarted │ Uptime │   memory │ err logs                         │
+├──────────┼────┼─────────┼──────┼────────┼──────┼───────────┼────────┼──────────┼──────────────────────────────────┤
+│ app      │ 0  │ cluster │ 6816 │ online │      │         0 │ 0s     │ 8.203 MB │ /var/www/.pm2/logs/app-err-0.log │
+└──────────┴────┴─────────┴──────┴────────┴──────┴───────────┴────────┴──────────┴──────────────────────────────────┘
+PM2 Resurrecting
+Processing......
+
+fs.js:427
+  return binding.open(pathModule._makeLong(path), stringToFlags(flags), mode);
+                 ^
+Error: ENOENT, no such file or directory '/var/www/.pm2/dump.pm2'
+    at Object.fs.openSync (fs.js:427:18)
+    at Object.fs.readFileSync (fs.js:284:15)
+    at Object.CLI.resurrect (/usr/lib/node_modules/pm2/lib/CLI.js:244:17)
+    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:138:9)
+    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/node_modules/commander/index.js:249:8)
+    at Command.EventEmitter.emit (events.js:98:17)
+    at Command.parseArgs (/usr/lib/node_modules/pm2/node_modules/commander/index.js:477:12)
+    at Command.parse (/usr/lib/node_modules/pm2/node_modules/commander/index.js:370:21)
+    at process.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:306:13)
+    at process.EventEmitter.emit (events.js:92:17)
+</code></pre>
+
+<p>&#8220;</p>
+
+<ol>
+<li><p>So we need to have a dump folder, create it manually:</p>
+
+<p> <code>$ sudo -u www-data mkdir /var/www/.pm2/dump.pm2</code></p></li>
+<li><p>Start App again, the error can be ignored.</p></li>
+</ol>
+
+
+<p>&#8220;</p>
+
+<pre><code>\#/etc/init.d/pm2-init.sh stop
+\# /etc/init.d/pm2-init.sh start
+Starting pm2
+{ online: true, success: true, pid: 7632 }
+PM2 Process launched
+┌──────────┬────┬─────────┬──────┬────────┬──────┬───────────┬────────┬──────────┬──────────────────────────────────┐
+│ App Name │ id │ mode    │ PID  │ status │ port │ Restarted │ Uptime │   memory │ err logs                         │
+├──────────┼────┼─────────┼──────┼────────┼──────┼───────────┼────────┼──────────┼──────────────────────────────────┤
+│ app      │ 0  │ cluster │ 7638 │ online │      │         0 │ 0s     │ 8.211 MB │ /var/www/.pm2/logs/app-err-0.log │
+└──────────┴────┴─────────┴──────┴────────┴──────┴───────────┴────────┴──────────┴──────────────────────────────────┘
+PM2 Resurrecting
+Processing......
+
+fs.js:476
+  var r = binding.read(fd, buffer, offset, length, position);
+                  ^
+Error: EISDIR, illegal operation on a directory
+    at Object.fs.readSync (fs.js:476:19)
+    at Object.fs.readFileSync (fs.js:310:28)
+    at Object.CLI.resurrect (/usr/lib/node_modules/pm2/lib/CLI.js:244:17)
+    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:138:9)
+    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/node_modules/commander/index.js:249:8)
+    at Command.EventEmitter.emit (events.js:98:17)
+    at Command.parseArgs (/usr/lib/node_modules/pm2/node_modules/commander/index.js:477:12)
+    at Command.parse (/usr/lib/node_modules/pm2/node_modules/commander/index.js:370:21)
+    at process.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:306:13)
+    at process.EventEmitter.emit (events.js:92:17)
+</code></pre>
+
+<p>&#8220;</p>
+
+<ol>
+<li>Check App running status</li>
+</ol>
+
+
+<p>&#8220;</p>
+
+<pre><code>$pm2 list
+┌──────────┬────┬─────────┬──────┬────────┬──────┬───────────┬────────┬───────────┬──────────────────────────────────┐
+│ App Name │ id │ mode    │ PID  │ status │ port │ Restarted │ Uptime │    memory │ err logs                         │
+├──────────┼────┼─────────┼──────┼────────┼──────┼───────────┼────────┼───────────┼──────────────────────────────────┤
+│ app      │ 0  │ cluster │ 7638 │ online │      │         0 │ 104s   │ 35.973 MB │ /var/www/.pm2/logs/app-err-0.log │
+└──────────┴────┴─────────┴──────┴────────┴──────┴───────────┴────────┴───────────┴──────────────────────────────────┘
+$pm2 monit
+⌬ PM2 monitoring :
+
+ ● app                                 \[                              \] 0 %
+\[0\] \[cluster_mode\]                     \[||||||||||||||||||||||||||    \] 35.973 MB
+</code></pre>
+
+<p>&#8220;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[我的程序我要让她完美]]></title>
