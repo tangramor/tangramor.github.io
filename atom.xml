@@ -4,7 +4,7 @@
   <title><![CDATA[Tangramor's Blog | 唐图]]></title>
   <link href="http://tangramor.github.io/atom.xml" rel="self"/>
   <link href="http://tangramor.github.io/"/>
-  <updated>2014-02-12T09:26:14+08:00</updated>
+  <updated>2014-02-12T09:31:32+08:00</updated>
   <id>http://tangramor.github.io/</id>
   <author>
     <name><![CDATA[tangramor]]></name>
@@ -25,7 +25,7 @@
 </ol>
 
 
-<p>&#8220;</p>
+<p>&#8220;`</p>
 
 <pre><code>sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:chris-lea/node.js
