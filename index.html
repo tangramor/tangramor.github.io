@@ -125,10 +125,10 @@ sudo apt-get &hellip;">
 
 <p>3. Create INIT script</p>
 
-<pre><code>`#pm2 startup`
-
-The content of /etc/init.d/pm2-init.sh, I modified it to start my app
+<pre><code>```#pm2 startup```
 </code></pre>
+
+<p>  The content of /etc/init.d/pm2-init.sh, I modified it to start my app</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -346,7 +346,7 @@ The content of /etc/init.d/pm2-init.sh, I modified it to start my app
 
 <p>5. So we need to have a dump folder, create it manually:</p>
 
-<pre><code>`$ sudo -u www-data mkdir /var/www/.pm2/dump.pm2`
+<pre><code>```$ sudo -u www-data mkdir /var/www/.pm2/dump.pm2```
 </code></pre>
 
 <p>6. Start App again, the error can be ignored.</p>
