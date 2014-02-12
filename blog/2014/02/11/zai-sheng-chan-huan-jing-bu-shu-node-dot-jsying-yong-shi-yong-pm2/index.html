@@ -9,11 +9,11 @@
   <meta name="author" content="tangramor">
 
   
-  <meta name="description" content="OS: Ubuntu-server 12.10 Install Node.js ( https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager ) 1
+  <meta name="description" content="OS: Ubuntu-server 12.10 1. Install Node.js ( https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager ) 1
 2
 3
 4
-sudo apt-get install &hellip;">
+sudo apt-get &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,10 +100,7 @@ sudo apt-get install &hellip;">
 
 <div class="entry-content"><p>OS: Ubuntu-server 12.10</p>
 
-<ol>
-<li>Install Node.js ( <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager</a>  )</li>
-</ol>
-
+<p>1. Install Node.js ( <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager</a>  )</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -115,10 +112,7 @@ sudo apt-get install &hellip;">
 </span><span class='line'>sudo apt-get install nodejs</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Install PM2 ( <a href="https://github.com/Unitech/pm2">https://github.com/Unitech/pm2</a> )</li>
-</ol>
-
+<p>2. Install PM2 ( <a href="https://github.com/Unitech/pm2">https://github.com/Unitech/pm2</a> )</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -126,14 +120,12 @@ sudo apt-get install &hellip;">
 </span><span class='line'>#npm install pm2@latest -g</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li><p>Create INIT script</p>
+<p>3. Create INIT script</p>
 
-<p> <code>#pm2 startup</code></p>
+<pre><code>`#pm2 startup`
 
-<p> The content of /etc/init.d/pm2-init.sh, I modified it to start my app</p></li>
-</ol>
-
+The content of /etc/init.d/pm2-init.sh, I modified it to start my app
+</code></pre>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -295,10 +287,7 @@ sudo apt-get install &hellip;">
 </span><span class='line'>exit $RETVAL</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Try to start up App:</li>
-</ol>
-
+<p>4. Try to start up App:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -352,13 +341,12 @@ sudo apt-get install &hellip;">
 </span><span class='line'>    at process.EventEmitter.emit (events.js:92:17)</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li><p>So we need to have a dump folder, create it manually:</p>
+<p>5. So we need to have a dump folder, create it manually:</p>
 
-<p> <code>$ sudo -u www-data mkdir /var/www/.pm2/dump.pm2</code></p></li>
-<li><p>Start App again, the error can be ignored.</p></li>
-</ol>
+<pre><code>`$ sudo -u www-data mkdir /var/www/.pm2/dump.pm2`
+</code></pre>
 
+<p>6. Start App again, the error can be ignored.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -416,10 +404,7 @@ sudo apt-get install &hellip;">
 </span><span class='line'>    at process.EventEmitter.emit (events.js:92:17)</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Check App running status</li>
-</ol>
-
+<p>7. Check App running status</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
