@@ -9,7 +9,11 @@
   <meta name="author" content="tangramor">
 
   
-  <meta name="description" content="OS: Ubuntu-server 12.10 Install Node.js ( https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager ) &#8220;` sudo apt-get install &hellip;">
+  <meta name="description" content="OS: Ubuntu-server 12.10 Install Node.js ( https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager ) 1
+2
+3
+4
+sudo apt-get install &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,28 +105,26 @@
 </ol>
 
 
-<p>&#8220;`</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install software-properties-common
+</span><span class='line'>sudo add-apt-repository ppa:chris-lea/node.js
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install nodejs</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:chris-lea/node.js
-sudo apt-get update
-sudo apt-get install nodejs
-</code></pre>
-
-<p>&#8220;</p>
 
 <ol>
 <li>Install PM2 ( <a href="https://github.com/Unitech/pm2">https://github.com/Unitech/pm2</a> )</li>
 </ol>
 
 
-<p>&#8220;</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$sudo su
+</span><span class='line'>#npm install pm2@latest -g</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>$sudo su
-#npm install pm2@latest -g
-</code></pre>
-
-<p>&#8220;</p>
 
 <ol>
 <li><p>Create INIT script</p>
@@ -133,126 +135,222 @@ sudo apt-get install nodejs
 </ol>
 
 
-<p>&#8220;</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
+</span><span class='line'># chkconfig: 2345 98 02
+</span><span class='line'>#
+</span><span class='line'># description: PM2 next gen process manager for Node.js
+</span><span class='line'># processname: pm2
+</span><span class='line'>#
+</span><span class='line'>### BEGIN INIT INFO
+</span><span class='line'># Provides:          pm2
+</span><span class='line'># Required-Start:
+</span><span class='line'># Required-Stop:
+</span><span class='line'># Default-Start:        2 3 4 5
+</span><span class='line'># Default-Stop:         0 1 6
+</span><span class='line'># Short-Description: PM2 init script
+</span><span class='line'># Description: PM2 is the next gen process manager for Node.js
+</span><span class='line'>### END INIT INFO
+</span><span class='line'>
+</span><span class='line'>NAME=pm2
+</span><span class='line'>PM2=/usr/lib/node_modules/pm2/bin/pm2
+</span><span class='line'>NODE=/usr/bin/nodejs
+</span><span class='line'>USER=www-data
+</span><span class='line'>APPHOME=/var/www/ali_product_database/public/api
+</span><span class='line'>
+</span><span class='line'>export HOME="/var/www"
+</span><span class='line'>
+</span><span class='line'>super() {
+</span><span class='line'>    cd $APPHOME && sudo -u $USER $*
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>start() {
+</span><span class='line'>    echo "Starting $NAME"
+</span><span class='line'>    super $NODE $PM2 start app.js -i max
+</span><span class='line'>    super $NODE $PM2 resurrect
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>stop() {
+</span><span class='line'>    super $NODE $PM2 dump
+</span><span class='line'>    super $NODE $PM2 delete all
+</span><span class='line'>    super $NODE $PM2 kill
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>restart() {
+</span><span class='line'>    echo "Restarting $NAME"
+</span><span class='line'>    stop
+</span><span class='line'>    start
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>reload() {
+</span><span class='line'>    echo "Reloading $NAME"
+</span><span class='line'>    super $NODE $PM2 reload all
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>status() {
+</span><span class='line'>    echo "Status for $NAME:"
+</span><span class='line'>    $NODE $PM2 list
+</span><span class='line'>    RETVAL=$?
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>case "$1" in
+</span><span class='line'>    start)
+</span><span class='line'>        start
+</span><span class='line'>        ;;
+</span><span class='line'>    stop)
+</span><span class='line'>        stop
+</span><span class='line'>        ;;
+</span><span class='line'>    status)
+</span><span class='line'>        status
+</span><span class='line'>        ;;
+</span><span class='line'>    restart)
+</span><span class='line'>        restart
+</span><span class='line'>        ;;
+</span><span class='line'>    reload)
+</span><span class='line'>        reload
+</span><span class='line'>        ;;
+</span><span class='line'>    \*)
+</span><span class='line'>        echo "Usage: {start|stop|status|restart|reload}"
+</span><span class='line'>        exit 1
+</span><span class='line'>        ;;
+</span><span class='line'>esac
+</span><span class='line'>exit $RETVAL</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#!/bin/bash
-# chkconfig: 2345 98 02
-#
-# description: PM2 next gen process manager for Node.js
-# processname: pm2
-#
-### BEGIN INIT INFO
-# Provides:          pm2
-# Required-Start:
-# Required-Stop:
-# Default-Start:        2 3 4 5
-# Default-Stop:         0 1 6
-# Short-Description: PM2 init script
-# Description: PM2 is the next gen process manager for Node.js
-### END INIT INFO
-
-NAME=pm2
-PM2=/usr/lib/node_modules/pm2/bin/pm2
-NODE=/usr/bin/nodejs
-USER=www-data
-APPHOME=/var/www/ali_product_database/public/api
-
-export HOME="/var/www"
-
-super() {
-    cd $APPHOME &amp;&amp; sudo -u $USER $*
-}
-
-start() {
-    echo "Starting $NAME"
-    super $NODE $PM2 start app.js -i max
-    super $NODE $PM2 resurrect
-}
-
-stop() {
-    super $NODE $PM2 dump
-    super $NODE $PM2 delete all
-    super $NODE $PM2 kill
-}
-
-restart() {
-    echo "Restarting $NAME"
-    stop
-    start
-}
-
-reload() {
-    echo "Reloading $NAME"
-    super $NODE $PM2 reload all
-}
-
-status() {
-    echo "Status for $NAME:"
-    $NODE $PM2 list
-    RETVAL=$?
-}
-
-case "$1" in
-    start)
-        start
-        ;;
-    stop)
-        stop
-        ;;
-    status)
-        status
-        ;;
-    restart)
-        restart
-        ;;
-    reload)
-        reload
-        ;;
-    \*)
-        echo "Usage: {start|stop|status|restart|reload}"
-        exit 1
-        ;;
-esac
-exit $RETVAL
-</code></pre>
-
-<p>&#8220;</p>
 
 <ol>
 <li>Try to start up App:</li>
 </ol>
 
 
-<p>&#8220;</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#/etc/init.d/pm2-init.sh start
+</span><span class='line'>Starting pm2
+</span><span class='line'>PM2 Process launched
+</span><span class='line'>┌──────────┬────┬─────────┬──────┬────────┬──────┬───────────┬────────┬──────────┬──────────────────────────────────┐
+</span><span class='line'>│ App Name │ id │ mode    │ PID  │ status │ port │ Restarted │ Uptime │   memory │ err logs                         │
+</span><span class='line'>├──────────┼────┼─────────┼──────┼────────┼──────┼───────────┼────────┼──────────┼──────────────────────────────────┤
+</span><span class='line'>│ app      │ 0  │ cluster │ 6816 │ online │      │         0 │ 0s     │ 8.203 MB │ /var/www/.pm2/logs/app-err-0.log │
+</span><span class='line'>└──────────┴────┴─────────┴──────┴────────┴──────┴───────────┴────────┴──────────┴──────────────────────────────────┘
+</span><span class='line'>PM2 Resurrecting
+</span><span class='line'>Processing......
+</span><span class='line'>
+</span><span class='line'>fs.js:427
+</span><span class='line'>  return binding.open(pathModule._makeLong(path), stringToFlags(flags), mode);
+</span><span class='line'>                 ^
+</span><span class='line'>Error: ENOENT, no such file or directory '/var/www/.pm2/dump.pm2'
+</span><span class='line'>    at Object.fs.openSync (fs.js:427:18)
+</span><span class='line'>    at Object.fs.readFileSync (fs.js:284:15)
+</span><span class='line'>    at Object.CLI.resurrect (/usr/lib/node_modules/pm2/lib/CLI.js:244:17)
+</span><span class='line'>    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:138:9)
+</span><span class='line'>    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/node_modules/commander/index.js:249:8)
+</span><span class='line'>    at Command.EventEmitter.emit (events.js:98:17)
+</span><span class='line'>    at Command.parseArgs (/usr/lib/node_modules/pm2/node_modules/commander/index.js:477:12)
+</span><span class='line'>    at Command.parse (/usr/lib/node_modules/pm2/node_modules/commander/index.js:370:21)
+</span><span class='line'>    at process.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:306:13)
+</span><span class='line'>    at process.EventEmitter.emit (events.js:92:17)</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#/etc/init.d/pm2-init.sh start
-Starting pm2
-PM2 Process launched
-┌──────────┬────┬─────────┬──────┬────────┬──────┬───────────┬────────┬──────────┬──────────────────────────────────┐
-│ App Name │ id │ mode    │ PID  │ status │ port │ Restarted │ Uptime │   memory │ err logs                         │
-├──────────┼────┼─────────┼──────┼────────┼──────┼───────────┼────────┼──────────┼──────────────────────────────────┤
-│ app      │ 0  │ cluster │ 6816 │ online │      │         0 │ 0s     │ 8.203 MB │ /var/www/.pm2/logs/app-err-0.log │
-└──────────┴────┴─────────┴──────┴────────┴──────┴───────────┴────────┴──────────┴──────────────────────────────────┘
-PM2 Resurrecting
-Processing......
-
-fs.js:427
-  return binding.open(pathModule._makeLong(path), stringToFlags(flags), mode);
-                 ^
-Error: ENOENT, no such file or directory '/var/www/.pm2/dump.pm2'
-    at Object.fs.openSync (fs.js:427:18)
-    at Object.fs.readFileSync (fs.js:284:15)
-    at Object.CLI.resurrect (/usr/lib/node_modules/pm2/lib/CLI.js:244:17)
-    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:138:9)
-    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/node_modules/commander/index.js:249:8)
-    at Command.EventEmitter.emit (events.js:98:17)
-    at Command.parseArgs (/usr/lib/node_modules/pm2/node_modules/commander/index.js:477:12)
-    at Command.parse (/usr/lib/node_modules/pm2/node_modules/commander/index.js:370:21)
-    at process.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:306:13)
-    at process.EventEmitter.emit (events.js:92:17)
-</code></pre>
-
-<p>&#8220;</p>
 
 <ol>
 <li><p>So we need to have a dump folder, create it manually:</p>
@@ -262,60 +360,92 @@ Error: ENOENT, no such file or directory '/var/www/.pm2/dump.pm2'
 </ol>
 
 
-<p>&#8220;</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#/etc/init.d/pm2-init.sh stop
+</span><span class='line'># /etc/init.d/pm2-init.sh start
+</span><span class='line'>Starting pm2
+</span><span class='line'>{ online: true, success: true, pid: 7632 }
+</span><span class='line'>PM2 Process launched
+</span><span class='line'>┌──────────┬────┬─────────┬──────┬────────┬──────┬───────────┬────────┬──────────┬──────────────────────────────────┐
+</span><span class='line'>│ App Name │ id │ mode    │ PID  │ status │ port │ Restarted │ Uptime │   memory │ err logs                         │
+</span><span class='line'>├──────────┼────┼─────────┼──────┼────────┼──────┼───────────┼────────┼──────────┼──────────────────────────────────┤
+</span><span class='line'>│ app      │ 0  │ cluster │ 7638 │ online │      │         0 │ 0s     │ 8.211 MB │ /var/www/.pm2/logs/app-err-0.log │
+</span><span class='line'>└──────────┴────┴─────────┴──────┴────────┴──────┴───────────┴────────┴──────────┴──────────────────────────────────┘
+</span><span class='line'>PM2 Resurrecting
+</span><span class='line'>Processing......
+</span><span class='line'>
+</span><span class='line'>fs.js:476
+</span><span class='line'>  var r = binding.read(fd, buffer, offset, length, position);
+</span><span class='line'>                  ^
+</span><span class='line'>Error: EISDIR, illegal operation on a directory
+</span><span class='line'>    at Object.fs.readSync (fs.js:476:19)
+</span><span class='line'>    at Object.fs.readFileSync (fs.js:310:28)
+</span><span class='line'>    at Object.CLI.resurrect (/usr/lib/node_modules/pm2/lib/CLI.js:244:17)
+</span><span class='line'>    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:138:9)
+</span><span class='line'>    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/node_modules/commander/index.js:249:8)
+</span><span class='line'>    at Command.EventEmitter.emit (events.js:98:17)
+</span><span class='line'>    at Command.parseArgs (/usr/lib/node_modules/pm2/node_modules/commander/index.js:477:12)
+</span><span class='line'>    at Command.parse (/usr/lib/node_modules/pm2/node_modules/commander/index.js:370:21)
+</span><span class='line'>    at process.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:306:13)
+</span><span class='line'>    at process.EventEmitter.emit (events.js:92:17)</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#/etc/init.d/pm2-init.sh stop
-# /etc/init.d/pm2-init.sh start
-Starting pm2
-{ online: true, success: true, pid: 7632 }
-PM2 Process launched
-┌──────────┬────┬─────────┬──────┬────────┬──────┬───────────┬────────┬──────────┬──────────────────────────────────┐
-│ App Name │ id │ mode    │ PID  │ status │ port │ Restarted │ Uptime │   memory │ err logs                         │
-├──────────┼────┼─────────┼──────┼────────┼──────┼───────────┼────────┼──────────┼──────────────────────────────────┤
-│ app      │ 0  │ cluster │ 7638 │ online │      │         0 │ 0s     │ 8.211 MB │ /var/www/.pm2/logs/app-err-0.log │
-└──────────┴────┴─────────┴──────┴────────┴──────┴───────────┴────────┴──────────┴──────────────────────────────────┘
-PM2 Resurrecting
-Processing......
-
-fs.js:476
-  var r = binding.read(fd, buffer, offset, length, position);
-                  ^
-Error: EISDIR, illegal operation on a directory
-    at Object.fs.readSync (fs.js:476:19)
-    at Object.fs.readFileSync (fs.js:310:28)
-    at Object.CLI.resurrect (/usr/lib/node_modules/pm2/lib/CLI.js:244:17)
-    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:138:9)
-    at Command.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/node_modules/commander/index.js:249:8)
-    at Command.EventEmitter.emit (events.js:98:17)
-    at Command.parseArgs (/usr/lib/node_modules/pm2/node_modules/commander/index.js:477:12)
-    at Command.parse (/usr/lib/node_modules/pm2/node_modules/commander/index.js:370:21)
-    at process.&lt;anonymous&gt; (/usr/lib/node_modules/pm2/bin/pm2:306:13)
-    at process.EventEmitter.emit (events.js:92:17)
-</code></pre>
-
-<p>&#8220;</p>
 
 <ol>
 <li>Check App running status</li>
 </ol>
 
 
-<p>&#8220;</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$pm2 list
+</span><span class='line'>┌──────────┬────┬─────────┬──────┬────────┬──────┬───────────┬────────┬───────────┬──────────────────────────────────┐
+</span><span class='line'>│ App Name │ id │ mode    │ PID  │ status │ port │ Restarted │ Uptime │    memory │ err logs                         │
+</span><span class='line'>├──────────┼────┼─────────┼──────┼────────┼──────┼───────────┼────────┼───────────┼──────────────────────────────────┤
+</span><span class='line'>│ app      │ 0  │ cluster │ 7638 │ online │      │         0 │ 104s   │ 35.973 MB │ /var/www/.pm2/logs/app-err-0.log │
+</span><span class='line'>└──────────┴────┴─────────┴──────┴────────┴──────┴───────────┴────────┴───────────┴──────────────────────────────────┘
+</span><span class='line'>$pm2 monit
+</span><span class='line'>⌬ PM2 monitoring :
+</span><span class='line'>
+</span><span class='line'> ● app                                 [                              ] 0 %
+</span><span class='line'>[0] [cluster_mode]                     [||||||||||||||||||||||||||    ] 35.973 MB</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>$pm2 list
-┌──────────┬────┬─────────┬──────┬────────┬──────┬───────────┬────────┬───────────┬──────────────────────────────────┐
-│ App Name │ id │ mode    │ PID  │ status │ port │ Restarted │ Uptime │    memory │ err logs                         │
-├──────────┼────┼─────────┼──────┼────────┼──────┼───────────┼────────┼───────────┼──────────────────────────────────┤
-│ app      │ 0  │ cluster │ 7638 │ online │      │         0 │ 104s   │ 35.973 MB │ /var/www/.pm2/logs/app-err-0.log │
-└──────────┴────┴─────────┴──────┴────────┴──────┴───────────┴────────┴───────────┴──────────────────────────────────┘
-$pm2 monit
-⌬ PM2 monitoring :
 
- ● app                                 [                              ] 0 %
-[0] [cluster_mode]                     [||||||||||||||||||||||||||    ] 35.973 MB
-</code></pre>
 
-<p>&#8220;</p>
 </div>
 
 
