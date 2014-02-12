@@ -135,21 +135,21 @@ sudo apt-get install nodejs
 
 <p>&#8220;</p>
 
-<pre><code>\#!/bin/bash
-\# chkconfig: 2345 98 02
-\#
-\# description: PM2 next gen process manager for Node.js
-\# processname: pm2
-\#
-\### BEGIN INIT INFO
-\# Provides:          pm2
-\# Required-Start:
-\# Required-Stop:
-\# Default-Start:        2 3 4 5
-\# Default-Stop:         0 1 6
-\# Short-Description: PM2 init script
-\# Description: PM2 is the next gen process manager for Node.js
-\### END INIT INFO
+<pre><code>#!/bin/bash
+# chkconfig: 2345 98 02
+#
+# description: PM2 next gen process manager for Node.js
+# processname: pm2
+#
+### BEGIN INIT INFO
+# Provides:          pm2
+# Required-Start:
+# Required-Stop:
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description: PM2 init script
+# Description: PM2 is the next gen process manager for Node.js
+### END INIT INFO
 
 NAME=pm2
 PM2=/usr/lib/node_modules/pm2/bin/pm2
@@ -225,7 +225,7 @@ exit $RETVAL
 
 <p>&#8220;</p>
 
-<pre><code>\#/etc/init.d/pm2-init.sh start
+<pre><code>#/etc/init.d/pm2-init.sh start
 Starting pm2
 PM2 Process launched
 ┌──────────┬────┬─────────┬──────┬────────┬──────┬───────────┬────────┬──────────┬──────────────────────────────────┐
@@ -264,8 +264,8 @@ Error: ENOENT, no such file or directory '/var/www/.pm2/dump.pm2'
 
 <p>&#8220;</p>
 
-<pre><code>\#/etc/init.d/pm2-init.sh stop
-\# /etc/init.d/pm2-init.sh start
+<pre><code>#/etc/init.d/pm2-init.sh stop
+# /etc/init.d/pm2-init.sh start
 Starting pm2
 { online: true, success: true, pid: 7632 }
 PM2 Process launched
@@ -311,8 +311,8 @@ Error: EISDIR, illegal operation on a directory
 $pm2 monit
 ⌬ PM2 monitoring :
 
- ● app                                 \[                              \] 0 %
-\[0\] \[cluster_mode\]                     \[||||||||||||||||||||||||||    \] 35.973 MB
+ ● app                                 [                              ] 0 %
+[0] [cluster_mode]                     [||||||||||||||||||||||||||    ] 35.973 MB
 </code></pre>
 
 <p>&#8220;</p>
