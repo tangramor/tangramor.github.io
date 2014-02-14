@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Fix "Failed to load c++ bson extension ..." for Node.js + MongoDB - Tangramor's Blog | 唐图</title>
+  <title>about - Tangramor's Blog | 唐图</title>
   <meta name="author" content="tangramor">
 
   
-  <meta name="description" content="When I deployed my Node.js + MongoDB application on my test server, I met &ldquo;Failed to load c++ bson extension, using pure JS version&rdquo;. &hellip;">
+  <meta name="description" content="About Jan 25th, 2014 Jan 25th, 2014 Tweet Comments Please enable JavaScript to view the comments powered by Disqus. Tangramor's Blog | 唐图 My Tech &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tangramor.github.io/blog/2014/02/14/fix-failed-to-load-c-plus-plus-bson-extension-dot-dot-dot-for-node-dot-js-plus-mongodb/">
+  <link rel="canonical" href="http://tangramor.github.io/about/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -67,15 +67,32 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Fix "Failed to Load C++ Bson Extension ..." for Node.js + MongoDB</h1>
-    
-    
+    <h1 class="entry-title">About</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-25T10:25:00+08:00" pubdate data-updated="true">Jan 25<span>th</span>, 2014</time></p>
+  </header>
+  
+  
+
+  
+    <footer>
       <p class="meta">
         
+        
 
 
 
@@ -87,67 +104,13 @@
   
 
 
-<time datetime="2014-02-14T15:51:33+08:00" pubdate data-updated="true">Feb 14<span>th</span>, 2014</time>
-        
-         | <a href="#disqus_thread">Comments</a>
+<time datetime="2014-01-25T10:25:00+08:00" pubdate data-updated="true">Jan 25<span>th</span>, 2014</time>
         
       </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>When I deployed my Node.js + MongoDB application on my test server, I met &ldquo;Failed to load c++ bson extension, using pure JS version&rdquo;. Even with the pure JS mongo driver the application works, but I still want to fix it.</p>
-
-<p>After google, I got following method to fix my problem:</p>
-
-<p>1. Install build-essential package:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  sudo apt-get install build-essential</span></code></pre></td></tr></table></div></figure>
-
-
-<p>2. Remove the mongodb module related node modules in node_modules, such as <code>connect-mongo</code>, <code>mongoose</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  $ rm -rf node_modules/connect-mongo node_modules/mongoose</span></code></pre></td></tr></table></div></figure>
-
-
-<p>3. Re-install the mongodb module related node modules</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  $ npm install</span></code></pre></td></tr></table></div></figure>
-
-</div>
-
-
-  <footer>
-    <p class="meta">
       
+        <div class="sharing">
   
-
-<span class="byline author vcard">Posted by <span class="fn">tangramor</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-14T15:51:33+08:00" pubdate data-updated="true">Feb 14<span>th</span>, 2014</time>
-      
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tangramor.github.io/blog/2014/02/14/fix-failed-to-load-c-plus-plus-bson-extension-dot-dot-dot-for-node-dot-js-plus-mongodb/" data-via="tangramor" data-counturl="http://tangramor.github.io/blog/2014/02/14/fix-failed-to-load-c-plus-plus-bson-extension-dot-dot-dot-for-node-dot-js-plus-mongodb/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tangramor.github.io/about/index.html" data-via="tangramor" data-counturl="http://tangramor.github.io/about/index.html" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -157,14 +120,9 @@
   
 </div>
 
-    
-    <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/11/zai-sheng-chan-huan-jing-bu-shu-node-dot-jsying-yong-shi-yong-pm2/" title="Previous Post: 在生产环境部署Node.js应用(使用PM2)">&laquo; 在生产环境部署Node.js应用(使用PM2)</a>
-      
-      
-    </p>
-  </footer>
+    </footer>
+  
 </article>
 
   <section>
@@ -293,8 +251,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tangramor.github.io/blog/2014/02/14/fix-failed-to-load-c-plus-plus-bson-extension-dot-dot-dot-for-node-dot-js-plus-mongodb/';
-        var disqus_url = 'http://tangramor.github.io/blog/2014/02/14/fix-failed-to-load-c-plus-plus-bson-extension-dot-dot-dot-for-node-dot-js-plus-mongodb/';
+        var disqus_identifier = 'http://tangramor.github.io/about/index.html';
+        var disqus_url = 'http://tangramor.github.io/about/index.html';
         var disqus_script = 'embed.js';
       
     (function () {
