@@ -1,0 +1,30 @@
+<p>When I deployed my Node.js + MongoDB application on my test server, I met &ldquo;Failed to load c++ bson extension, using pure JS version&rdquo;. Even with the pure JS mongo driver the application works, but I still want to fix it.</p>
+
+<p>After google, I got following method to fix my problem:</p>
+
+<ol>
+<li>Install build-essential package:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  sudo apt-get install build-essential</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Remove the mongodb module related node modules in node_modules, such as <code>connect-mongo</code>, <code>mongoose</code></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  $ rm -rf node_modules/connect-mongo node_modules/mongoose</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Re-install the mongodb module related node modules</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  $ npm install</span></code></pre></td></tr></table></div></figure>
+

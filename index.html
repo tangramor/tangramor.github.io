@@ -9,11 +9,7 @@
   <meta name="author" content="tangramor">
 
   
-  <meta name="description" content="OS: Ubuntu-server 12.10 1. Install Node.js ( https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager ) 1
-2
-3
-4
-sudo apt-get &hellip;">
+  <meta name="description" content="When I deployed my Node.js + MongoDB application on my test server, I met &ldquo;Failed to load c++ bson extension, using pure JS version&rdquo;. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +65,74 @@ sudo apt-get &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/14/fix-failed-to-load-c-plus-plus-bson-extension-dot-dot-dot-for-node-dot-js-plus-mongodb/">Fix Failed to Load C Plus Plus Bson Extension Dot Dot Dot for Node Dot Js Plus Mongodb</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-14T00:00:00+08:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2014/02/14/fix-failed-to-load-c-plus-plus-bson-extension-dot-dot-dot-for-node-dot-js-plus-mongodb/#disqus_thread"
+             data-disqus-identifier="http://tangramor.github.io/blog/2014/02/14/fix-failed-to-load-c-plus-plus-bson-extension-dot-dot-dot-for-node-dot-js-plus-mongodb/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When I deployed my Node.js + MongoDB application on my test server, I met &ldquo;Failed to load c++ bson extension, using pure JS version&rdquo;. Even with the pure JS mongo driver the application works, but I still want to fix it.</p>
+
+<p>After google, I got following method to fix my problem:</p>
+
+<ol>
+<li>Install build-essential package:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  sudo apt-get install build-essential</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Remove the mongodb module related node modules in node_modules, such as <code>connect-mongo</code>, <code>mongoose</code></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  $ rm -rf node_modules/connect-mongo node_modules/mongoose</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Re-install the mongodb module related node modules</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  $ npm install</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -501,6 +565,10 @@ sudo apt-get &hellip;">
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/14/fix-failed-to-load-c-plus-plus-bson-extension-dot-dot-dot-for-node-dot-js-plus-mongodb/">Fix Failed to Load C Plus Plus Bson Extension Dot Dot Dot for Node Dot Js Plus Mongodb</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/02/11/zai-sheng-chan-huan-jing-bu-shu-node-dot-jsying-yong-shi-yong-pm2/">在生产环境部署Node.js应用(使用PM2)</a>
